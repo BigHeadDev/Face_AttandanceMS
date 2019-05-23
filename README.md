@@ -6,4 +6,4 @@
 👉创建数据库  
 👉创建三个表  
 👉在./人脸识别考勤系统/Model/BaiduUser中填写自己的信息。   
-👉在./人脸识别考勤系统/APP.Config中的ConnectingString中填写数据库的连接字符串
+👉在./人脸识别考勤系统/APP.Config中的connectionStrings中填写数据库的连接字符串
