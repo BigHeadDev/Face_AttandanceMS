@@ -1,0 +1,36 @@
+USE [Face_AttendanceDB]
+GO
+
+/****** Object:  Table [dbo].[EmployeeTable]    Script Date: 2019/5/23 星期四 20:17:19 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[EmployeeTable](
+	[Eid] [int] NOT NULL,
+	[Ename] [nchar](10) NOT NULL,
+	[Esex] [bit] NOT NULL,
+	[Ebirthday] [date] NOT NULL,
+	[EattendanceTimes] [int] NULL,
+	[ElastSignTime] [datetime] NULL,
+	[EdepartId] [int] NOT NULL,
+	[ElateTimes] [int] NULL,
+	[EearlyTimes] [int] NULL,
+ CONSTRAINT [PK_EmployeeTable] PRIMARY KEY CLUSTERED 
+(
+	[Eid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[EmployeeTable] ADD  CONSTRAINT [DF_EmployeeTable_attendanceTimes]  DEFAULT ((0)) FOR [EattendanceTimes]
+GO
+
+ALTER TABLE [dbo].[EmployeeTable] ADD  CONSTRAINT [DF_EmployeeTable_ElateTimes]  DEFAULT ((0)) FOR [ElateTimes]
+GO
+
+ALTER TABLE [dbo].[EmployeeTable] ADD  CONSTRAINT [DF_EmployeeTable_EearlyTimes]  DEFAULT ((0)) FOR [EearlyTimes]
+GO
+
