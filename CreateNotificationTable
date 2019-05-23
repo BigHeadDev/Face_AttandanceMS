@@ -1,0 +1,19 @@
+USE [Face_AttendanceDB]
+GO
+
+/****** Object:  Table [dbo].[NotificationTable]    Script Date: 2019/5/23 星期四 20:19:26 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[NotificationTable](
+	[Nid] [int] NOT NULL,
+	[Ntitle] [nvarchar](50) NOT NULL,
+	[Ncontent] [nvarchar](max) NOT NULL,
+	[NisImportant] [bit] NOT NULL,
+	[Ntime] [datetime] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
