@@ -1,0 +1,78 @@
+﻿<Page x:Class="人脸识别考勤系统.Pages.ManagePage.EmployeeManagePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+      xmlns:local="clr-namespace:人脸识别考勤系统.Pages.ManagePage"
+      mc:Ignorable="d" 
+      xmlns:cvt="clr-namespace:人脸识别考勤系统.Converter"
+      d:DesignHeight="450" d:DesignWidth="800"
+      DataContext="{Binding Source={StaticResource Locator},Path=EmployeeManage}"
+      Title="EmployeeManagePage">
+    <Page.Resources>
+        <cvt:BoolToSexStringConverter x:Key="BoolToSex"/>
+        <cvt:ComboxEventArgsConverter x:Key="ComboxArgsConverter"/>
+        <cvt:TextBoxEventArgsConverter x:Key="TextArgsConverter"/>
+    </Page.Resources>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Margin="10,10,10,10" FontSize="15" Content="添加员工" Height="50" Width="100" Click="AddEmployee_Click"/>
+            <StackPanel Height="50" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center" Text="分类筛选:" FontSize="20"/>
+                <ComboBox x:Name="cboxDepart" DisplayMemberPath="Dname" SelectedValuePath="Did"  Margin="10,10" Width="150">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <command:EventToCommand Command="{Binding SelectionChangedCommand}" EventArgsConverter="{StaticResource ComboxArgsConverter}" EventArgsConverterParameter="{Binding ElementName=cboxDepart}" PassEventArgsToCommand="True"></command:EventToCommand>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Height="50" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center" Text="姓名查找:" FontSize="20"/>
+                <TextBox x:Name="txtKeyWords" Margin="10,10" Width="150">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <command:EventToCommand Command="{Binding TextChangedCommand}" EventArgsConverter="{StaticResource TextArgsConverter}" EventArgsConverterParameter="{Binding ElementName=txtKeyWords}" PassEventArgsToCommand="True"></command:EventToCommand>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+            </StackPanel>
+            <Button Margin="10,10,10,10" FontSize="15" Content="重置搜索" Height="50" Width="100" Click="Refresh_Click" Command="{Binding }"/>
+        </StackPanel>
+        <DataGrid x:Name="dgEp" MouseDoubleClick="dg_DoubleClick" IsReadOnly="True" ItemsSource="{Binding EmployeeModelList,Mode=OneWay}" AutoGenerateColumns="False" BorderBrush="Black" BorderThickness="1" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="员工id" Binding="{Binding Eid}" Width="100"/>
+                <DataGridTextColumn Header="部门" Binding="{Binding EdepartName}" Width="100"/>
+                <DataGridTextColumn Header="姓名" Binding="{Binding Ename}" Width="100"/>
+                <DataGridTextColumn Header="性别" Binding="{Binding Esex,Converter={StaticResource BoolToSex}}" Width="100"/>
+                <DataGridTextColumn Header="生日" Binding="{Binding Ebirthday}" Width="200"/>
+                <DataGridTextColumn Header="考勤次数" Binding="{Binding EattendanceTimes}" Width="100"/>
+                <DataGridTextColumn Header="上次签到时间" Binding="{Binding ElastSignTime}" Width="200"/>
+                <DataGridTemplateColumn Header="删除操作" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Width="30" Height="30" Command="{Binding DataContext.DeleteCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" Background="Transparent">
+                                <Image Stretch="UniformToFill" Source="/Icons/delete.png"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="添加人脸" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Width="30" Height="30" Command="{Binding DataContext.AddFaceCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" Background="Transparent">
+                                <Image Stretch="UniformToFill" Source="/Icons/renlianjiance.png"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

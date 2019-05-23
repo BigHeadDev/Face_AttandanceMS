@@ -1,0 +1,18 @@
+﻿<controls:MetroWindow x:Class="人脸识别考勤系统.Pages.NotificationDisplayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:人脸识别考勤系统.Pages"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="通知正文" WindowStartupLocation="CenterScreen" Height="600" Width="800" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding notificationModel.Ntitle}" FontSize="30"/>
+        <TextBox Grid.Row="1" IsReadOnly="True" Width="800" AcceptsReturn="True" Text="{Binding notificationModel.Ncontent}" FontSize="25" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+    </Grid>
+</controls:MetroWindow>

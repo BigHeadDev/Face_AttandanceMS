@@ -1,0 +1,20 @@
+﻿<controls:MetroWindow x:Class="人脸识别考勤系统.View.SignFacesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:人脸识别考勤系统.View"
+        xmlns:WPFMediaKit="clr-namespace:WPFMediaKit.DirectShow.Controls;assembly=WPFMediaKit"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d"
+         Icon="/Icons/logo.jpg"
+        Title="人脸签到" Height="450" Width="750"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid>
+        <WPFMediaKit:VideoCaptureElement x:Name="aceAdd" HorizontalAlignment="Center" Stretch="Fill" VerticalAlignment="Center">
+        </WPFMediaKit:VideoCaptureElement>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" x:Name="lb"/>
+        <Rectangle x:Name="rec" StrokeThickness="5" Stroke="SkyBlue" Width="250" Height="250"/>
+    </Grid>
+</controls:MetroWindow>
